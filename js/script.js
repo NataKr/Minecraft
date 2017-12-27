@@ -10,8 +10,7 @@ $(document).ready(function(){
 });
 
 generateGameField=function(){
-
-  $(".start").hide();
+  $(".start-screen").hide();
   $(".wrapper-wrapper").show();
 
   //creating the world field

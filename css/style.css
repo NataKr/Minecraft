@@ -42,4 +42,47 @@
 .start{
   margin: 0 auto;
   text-align: center;
+   background-image: url('../images/logo.png');
+   background-size:contain;
+   background-repeat: no-repeat;
+   transform: translate(10px, 50%);
+   height:340px;
 }
+
+.start-screen{
+width:1400px;
+height:900px;
+background-image:url('../images/bg.jpg');
+background-size:contain;
+background-image:cover;
+background-repeat: no-repeat;
+}
+
+#startGame,#tutorial{
+transform: translate(20px,350%);
+height:70px;
+width:220px;
+
+
+}
+
+.btn3d {
+    position:relative;
+    border:0;
+    border-radius:3px;
+    margin:0px 0px 0 40px;
+    transition:all .09s linear;
+    box-shadow:0 0 0 1px transparent inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 6px 6px 0 0 #ccc, 6px 6px 0 1px rgba(0,0,0,0.2), 6px 6px 3px 0px rgba(0,0,0,0.3);
+    outline:medium none;
+    -moz-outline-style:none;
+}
+.btn3d:active {
+    top:7px;
+}
+.btn3d:focus {
+    outline:medium none;
+    -moz-outline-style:none;
+}
+
+.btn3d.btn-default {
+    background-color:rgb(176,163,162);
