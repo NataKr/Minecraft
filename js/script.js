@@ -6,6 +6,9 @@ var selectedTool="";
 var selectedInventory="";
 
 $(document).ready(function(){
+  var h = window.innerHeight;
+  var w = window.innerWidth;
+  $(".start-screen").css( { "height":h+"px", "width":w+"px" } );
   $("#startGame").on("click", generateGameField);
 });
 
@@ -69,3 +72,4 @@ action=function(event){
   alert($(this).attr("id"));
   console.log($(this).attr("id"));
 }
+

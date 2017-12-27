@@ -11,8 +11,9 @@
     width: 750px;
     height: 600px;
     border: 0.5px solid black;
-    display: flex;
-    flex-wrap: wrap;
+    /*display: flex;
+    flex-wrap: wrap;*/
+    line-height: 0px;
   }
 
     .grass{
@@ -50,12 +51,12 @@
 }
 
 .start-screen{
-width:1400px;
-height:900px;
+/*width:1400px;
+height:900px;*/
 background-image:url('../images/bg.jpg');
-background-size:contain;
-background-image:cover;
+background-size:cover;
 background-repeat: no-repeat;
+background-position:center;
 }
 
 #startGame,#tutorial{
