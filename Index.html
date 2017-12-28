@@ -2,26 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Minecraft</title>
-    <link href="https://fonts.googleapis.com/css?family=Pangolin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="start-screen">
+  <div class="start-screen">
     <div class="start">
-        <button id="startGame"  class="btn btn-default btn-lg btn3d " > PLAY MINECRAFT</button>
-
+        <div class="logo"></div>
+        <button id="startGame"  class="btn btn-default btn-lg btn3d">PLAY</button>
         <button type="button" id="tutorial"  class="btn btn-default btn-lg btn3d " data-toggle="modal" data-target="#exampleModalLong">TUTORIAL</button>
-
     </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
+  </div>
+  <!-- Modal -->
+<div class="container">
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">Minecraft tutorial</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -29,26 +33,41 @@
             </button>
         </div>
         <div class="modal-body">
-            To see the rules of this game please "clik" on the button  Rules below
+            For the guidance on the game please click the Rules button below.
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <a href="https://www.youtube.com/watch?v=vUNs_-asTdM" target="_blank"><button type="button" class="btn btn-primary">Rules</button></a>
         </div>
-    </div>
+      </div>
+   </div>
+  </div>
 </div>
-</div>
+<!-- Modal end -->
 
-<!-- Modal -->
-
-<div class="wrapper-wrapper">
-    <div class="content-wrapper">
+    <div class="wrapper-wrapper">
+      <div class="content-wrapper">
         <div class="worldBox"></div>
-        <div class="toolBox"></div>
+        <div class="toolBox">
+          <div class="tools-wrapper">
+            <h4>Tools</h4>
+            <div id="tool-pickaxe" class="tools pickaxe">Pickaxe</div>
+            <div id="tool-shovel" class="tools shovel">Shovel</div>
+            <div id="tool-axe"  class="tools axe">Axe</div>
+          </div>
+          <div class="inventory-wrapper">
+            <h4>Inventory</h4>
+            <div id="grass" class="inventory grass">0</div>
+            <div id="leaf" class="inventory leaf">0</div>
+            <div id="soil" class="inventory soil">0</div>
+            <div id="rock" class="inventory rock">0</div>
+            <div id="tree" class="inventory tree">0</div>
+            <div id="person" class="inventory person">5</div>
+            <div class="reset">Reset</div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-
-<script src="./js/script.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>
