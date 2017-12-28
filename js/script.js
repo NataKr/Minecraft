@@ -1,7 +1,8 @@
 //global variables
+var Minecraft={};
 var r=20;
 var c=25;
-var gameGrid=new Array(r);
+Minecraft.gameGrid=new Array(r);
 var selectedTool="";
 var sessionToolsArray=[];
 
@@ -10,32 +11,32 @@ $(document).ready(function(){
   var w = window.innerWidth;
   $(".start-screen").css( { "height":h+"px", "width":w+"px" } );
 
-  $("#startGame").on("click", generateGameField);
-  bindFunctionsToToolsAndInventory();
+  $("#startGame").on("click", Minecraft.generateGameField);
+  Minecraft.bindFunctionsToToolsAndInventory();
 });
 
-bindFunctionsToToolsAndInventory=function(){
+Minecraft.bindFunctionsToToolsAndInventory=function(){
 
-  $(".tools").on("click", chooseTool);
-  $(".tools").on("mouseover mouseout", emphasize);
+  $(".tools").on("click", Minecraft.chooseTool);
+  $(".tools").on("mouseover mouseout", Minecraft.emphasize);
 
   //bind function to Inventory
-  $(".inventory").on("click", chooseTool);
-  $(".inventory").on("mouseover mouseout", emphasize);
+  $(".inventory").on("click", Minecraft.chooseTool);
+  $(".inventory").on("mouseover mouseout", Minecraft.emphasize);
 }
 
-generateGameField=function(){
+Minecraft.generateGameField=function(){
 
   $(".start-screen").hide(); //changed jon
   $(".wrapper-wrapper").show();
-  soundTheme();
+  Minecraft.soundTheme();
 
   //creating the world field
   for (var i=0; i<r; i++){
     var d = new Date();
     var time = d.getHours();
 
-    gameGrid[i]=new Array(c);
+    Minecraft.gameGrid[i]=new Array(c);
     for (var j=0; j<c; j++){
       var cell=$("<div/>");
       cell.attr("id", "row"+i+"column"+j);
@@ -76,21 +77,21 @@ generateGameField=function(){
       cell.data("row", i);
       cell.data("column", j);
 
-      cell.on("click", changeWorld);
-      cell.hover(hightlight, unhightlight);
+      cell.on("click", Minecraft.changeWorld);
+      cell.hover(Minecraft.hightlight, Minecraft.unhightlight);
 
       $(".worldBox").append(cell);
-      gameGrid[i][j]=cell;
+      Minecraft.gameGrid[i][j]=cell;
     }
   }
-  gameGrid[9][17].addClass("leaf");
-  gameGrid[7][19].addClass("leaf");
-  gameGrid[9][21].addClass("leaf");
+  Minecraft.gameGrid[9][17].addClass("leaf");
+  Minecraft.gameGrid[7][19].addClass("leaf");
+  Minecraft.gameGrid[9][21].addClass("leaf");
 
-  $(".reset").on("click", clearField);
+  $(".reset").on("click", Minecraft.clearField);
 }
 
-chooseTool=function(event){
+Minecraft.chooseTool=function(event){
   $(this).css({"opacity":"0.8", "background-color":"blue"});
   selectedTool=$(this);
   var sound = new Audio("./images/click.wav");
@@ -104,37 +105,37 @@ chooseTool=function(event){
   console.log(sessionToolsArray);
 }
 
-emphasize=function(event){
+Minecraft.emphasize=function(event){
   $(this).toggleClass("highlighted");
 }
 
-clearField=function(){
+Minecraft.clearField=function(){
 
   var world=$(".worldBox div");
   for (var i=world.length-1; i>=0; i--){
     world[i].remove();
   }
 
-  generateGameField();
+  Minecraft.generateGameField();
 
   var invArray=$(".inventory");
   invArray.text(0);
   $(".inventory.person").text(5);
 }
 
-hightlight=function(event){
+Minecraft.hightlight=function(event){
   $(this).css({"height":"4.95%", "width":"3.95%"});
   console.log($(this).css("height"));
   console.log($(this).css("width"));
   $(this).css({"border":"0.3px solid white"});
 }
 
-unhightlight=function(event){
+Minecraft.unhightlight=function(event){
   $(this).css({"height":"5%", "width":"4%"});
   $(this).css({"border":"none"});
 }
 
-changeWorld=function(event){
+Minecraft.changeWorld=function(event){
 
   if (selectedTool.attr("class").includes("tools")){
     if (selectedTool.attr("id")=="tool-shovel"){
@@ -143,16 +144,16 @@ changeWorld=function(event){
         var counter=parseInt($(".inventory.grass").text())+1;
 
         $(".inventory.grass").text(counter);
-        digSound();
+        Minecraft.digSound();
       }
       else if($(this).attr("class")=="soil"){
         $(this).removeClass("soil");
         var counter=parseInt($(".inventory.soil").text())+1;
 
         $(".inventory.soil").text(counter);
-        digSound();
+        Minecraft.digSound();
       }else{
-        blink();
+        Minecraft.blink();
       }
     }
 
@@ -161,15 +162,15 @@ changeWorld=function(event){
         $(this).removeClass("rock");
         var counter=parseInt($(".inventory.rock").text())+1;
         $(".inventory.rock").text(counter);
-        correctSound();
+        Minecraft.correctSound();
       } else if ($(this).attr("class")=="person"){
         $(this).removeClass("person");
         var counter=parseInt($(".inventory.person").text())+1;
         $(".inventory.person").text(counter);
-        correctSound();
+        Minecraft.correctSound();
       }
       else{
-        blink();
+        Minecraft.blink();
       }
     }
 
@@ -178,14 +179,14 @@ changeWorld=function(event){
         $(this).removeClass("leaf");
         var counter=parseInt($(".inventory.leaf").text())+1;
         $(".inventory.leaf").text(counter);
-        woodcutSound();
+        Minecraft.woodcutSound();
       } else if ($(this).attr("class")=="tree"){
         $(this).removeClass("tree");
         var counter=parseInt($(".inventory.tree").text())+1;
         $(".inventory.tree").text(counter);
-        woodcutSound();
+        Minecraft.woodcutSound();
       } else{
-        blink();
+        Minecraft.blink();
       }
     }
   }
@@ -204,35 +205,35 @@ changeWorld=function(event){
         var elCol=parseInt($(this).data("column"));
         console.log(elRow);
         console.log(elCol);
-        console.log(gameGrid[elRow][elCol]);
+        console.log(Minecraft.gameGrid[elRow][elCol]);
         while (flag){
-          if (gameGrid[elRow+1][elCol].attr("class")==null||gameGrid[elRow+1][elCol].attr("class")==""||gameGrid[elRow+1][elCol].attr("class")==undefined){
+          if (Minecraft.gameGrid[elRow+1][elCol].attr("class")==null||Minecraft.gameGrid[elRow+1][elCol].attr("class")==""||Minecraft.gameGrid[elRow+1][elCol].attr("class")==undefined){
               elRow++;
               console.log(elRow);
           }
 
           else{
-            gameGrid[elRow][elCol].addClass(manipulatedClass); //
+            Minecraft.gameGrid[elRow][elCol].addClass(manipulatedClass); //
             var counter=parseInt($(fullClassName).text())-1;
             $(fullClassName).text(counter);
-            correctSound();
+            Minecraft.correctSound();
             flag=false;
           }
         }
       }
       else{
-        blink();
+        Minecraft.blink();
       }
     }
 
     else{
-      blink();
+      Minecraft.blink();
     }
   }
 
 }
 
-blink=function(){
+Minecraft.blink=function(){
   var currentColor=selectedTool.css("background-color");
   console.log(currentColor);
   selectedTool.css({"background-color":"red"});
@@ -243,22 +244,22 @@ blink=function(){
   },300);
 }
 
-correctSound=function(){
+Minecraft.correctSound=function(){
   var sound=new Audio("./images/brick.wav");
   sound.play();
 }
 
-digSound=function(){
+Minecraft.digSound=function(){
   var sound=new Audio("./images/dig.wav");
   sound.play();
 }
 
-woodcutSound=function(){
+Minecraft.woodcutSound=function(){
   var sound=new Audio("./images/woodcutting.wav");
   sound.play();
 }
 
-soundTheme=function(){
+Minecraft.soundTheme=function(){
   var sound=new Audio("./images/thunder.wav");
   sound.play();
   sound=new Audio("./images/forest.wav");
