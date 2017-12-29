@@ -101,8 +101,7 @@ Minecraft.chooseTool=function(event){
     sessionToolsArray[sessionToolsArray.length-2].css({"opacity":"1", "background-color":"#0C0B3D"});
     sessionToolsArray.shift();
   }
-  console.log(selectedTool);
-  console.log(sessionToolsArray);
+
 }
 
 Minecraft.emphasize=function(event){
@@ -125,8 +124,7 @@ Minecraft.clearField=function(){
 
 Minecraft.hightlight=function(event){
   $(this).css({"height":"4.95%", "width":"3.95%"});
-  console.log($(this).css("height"));
-  console.log($(this).css("width"));
+
   $(this).css({"border":"0.3px solid white"});
 }
 
@@ -194,12 +192,12 @@ Minecraft.changeWorld=function(event){
   else if (selectedTool.attr("class").includes("inventory")){
 
   if (selectedTool.attr("id")=="wholeTree"){
-        console.log("the right tool is chosen");
+
           if (parseInt($(".inventory.wholeTree").text())>0){
-          console.log("the tree resource is enough");
-          console.log($(this));
+
+
           if ($(this).attr("class")==null||$(this).attr("class")==""||$(this).attr("class")=="cloud"||$(this).attr("class")==undefined){
-            console.log("the event cell is clear");
+
             var counter=0;//
             var elRow=parseInt($(this).data("row"));
             var elCol=parseInt($(this).data("column"));
@@ -207,8 +205,7 @@ Minecraft.changeWorld=function(event){
               for (var j=0; j<3; j++){
                 if (!(Minecraft.gameGrid[elRow+i][elCol+j].attr("class")=="cloud"||Minecraft.gameGrid[elRow+i][elCol+j].attr("class")==null||Minecraft.gameGrid[elRow+i][elCol+j].attr("class")==undefined||Minecraft.gameGrid[elRow+i][elCol+j].attr("class")=="")){
                   counter++;
-                  console.log(counter);
-                  console.log(Minecraft.gameGrid[elRow+i][elCol+j]);
+
                 }
               }
             }
@@ -235,18 +232,14 @@ Minecraft.changeWorld=function(event){
   else{
         var manipulatedClass=selectedTool.attr("id");
         var fullClassName=".inventory."+manipulatedClass;
-        console.log(manipulatedClass);
-        console.log(fullClassName);
-        console.log(selectedTool);
+
         if (parseInt($(fullClassName).text())>0){
           if ($(this).attr("class")==null||$(this).attr("class")==""||$(this).attr("class")=="cloud"||$(this).attr("class")==undefined){
 
             flag=true;
             var elRow=parseInt($(this).data("row"));
             var elCol=parseInt($(this).data("column"));
-            console.log(elRow);
-            console.log(elCol);
-            console.log(Minecraft.gameGrid[elRow][elCol]);
+
             while (flag){
               if (Minecraft.gameGrid[elRow+1][elCol].attr("class")==null||Minecraft.gameGrid[elRow+1][elCol].attr("class")==""||Minecraft.gameGrid[elRow+1][elCol].attr("class")==undefined){
                   elRow++;
@@ -293,7 +286,7 @@ Minecraft.createTree=function(r,c){
 
 Minecraft.blink=function(){
   var currentColor=selectedTool.css("background-color");
-  console.log(currentColor);
+
   selectedTool.css({"background-color":"red"});
   var sound=new Audio("./images/error2.wav");
   sound.play();
