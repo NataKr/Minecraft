@@ -192,45 +192,103 @@ Minecraft.changeWorld=function(event){
   }
 
   else if (selectedTool.attr("class").includes("inventory")){
-    var manipulatedClass=selectedTool.attr("id");
-    var fullClassName=".inventory."+manipulatedClass;
-    console.log(manipulatedClass);
-    console.log(fullClassName);
-    console.log(selectedTool);
-    if (parseInt($(fullClassName).text())>0){
-      if ($(this).attr("class")==null||$(this).attr("class")==""||$(this).attr("class")=="cloud"||$(this).attr("class")==undefined){
 
-        flag=true;
-        var elRow=parseInt($(this).data("row"));
-        var elCol=parseInt($(this).data("column"));
-        console.log(elRow);
-        console.log(elCol);
-        console.log(Minecraft.gameGrid[elRow][elCol]);
-        while (flag){
-          if (Minecraft.gameGrid[elRow+1][elCol].attr("class")==null||Minecraft.gameGrid[elRow+1][elCol].attr("class")==""||Minecraft.gameGrid[elRow+1][elCol].attr("class")==undefined){
-              elRow++;
-              console.log(elRow);
+  if (selectedTool.attr("id")=="wholeTree"){
+        console.log("the right tool is chosen");
+          if (parseInt($(".inventory.wholeTree").text())>0){
+          console.log("the tree resource is enough");
+          console.log($(this));
+          if ($(this).attr("class")==null||$(this).attr("class")==""||$(this).attr("class")=="cloud"||$(this).attr("class")==undefined){
+            console.log("the event cell is clear");
+            var counter=0;//
+            var elRow=parseInt($(this).data("row"));
+            var elCol=parseInt($(this).data("column"));
+            for(var i=0; i<4; i++){
+              for (var j=0; j<3; j++){
+                if (!(Minecraft.gameGrid[elRow+i][elCol+j].attr("class")=="cloud"||Minecraft.gameGrid[elRow+i][elCol+j].attr("class")==null||Minecraft.gameGrid[elRow+i][elCol+j].attr("class")==undefined||Minecraft.gameGrid[elRow+i][elCol+j].attr("class")=="")){
+                  counter++;
+                  console.log(counter);
+                  console.log(Minecraft.gameGrid[elRow+i][elCol+j]);
+                }
+              }
+            }
+
+            if (counter>0){
+              blink();
+
+            }
+            else{
+              Minecraft.createTree(elRow, elCol);
+              var counterItem=parseInt($(".inventory.wholeTree").text())-1;
+              $(".inventory.wholeTree").text(counterItem);
+            }
           }
-
           else{
-            Minecraft.gameGrid[elRow][elCol].addClass(manipulatedClass); //
-            var counter=parseInt($(fullClassName).text())-1;
-            $(fullClassName).text(counter);
-            Minecraft.correctSound();
-            flag=false;
+            blink();
           }
         }
-      }
-      else{
-        Minecraft.blink();
-      }
-    }
+        else{
+          blink();
+        }
+  }
 
-    else{
-      Minecraft.blink();
+  else{
+        var manipulatedClass=selectedTool.attr("id");
+        var fullClassName=".inventory."+manipulatedClass;
+        console.log(manipulatedClass);
+        console.log(fullClassName);
+        console.log(selectedTool);
+        if (parseInt($(fullClassName).text())>0){
+          if ($(this).attr("class")==null||$(this).attr("class")==""||$(this).attr("class")=="cloud"||$(this).attr("class")==undefined){
+
+            flag=true;
+            var elRow=parseInt($(this).data("row"));
+            var elCol=parseInt($(this).data("column"));
+            console.log(elRow);
+            console.log(elCol);
+            console.log(Minecraft.gameGrid[elRow][elCol]);
+            while (flag){
+              if (Minecraft.gameGrid[elRow+1][elCol].attr("class")==null||Minecraft.gameGrid[elRow+1][elCol].attr("class")==""||Minecraft.gameGrid[elRow+1][elCol].attr("class")==undefined){
+                  elRow++;
+                  if (elRow==19){
+                    Minecraft.gameGrid[elRow][elCol].addClass(manipulatedClass); //
+                    var counter=parseInt($(fullClassName).text())-1;
+                    $(fullClassName).text(counter);
+                    Minecraft.correctSound();
+                    flag=false;
+                  }
+              }
+
+              else{
+                Minecraft.gameGrid[elRow][elCol].addClass(manipulatedClass); //
+                var counter=parseInt($(fullClassName).text())-1;
+                $(fullClassName).text(counter);
+                Minecraft.correctSound();
+                flag=false;
+              }
+            }
+          }
+          else{
+            Minecraft.blink();
+          }
+        }
+
+        else{
+          Minecraft.blink();
+        }
     }
   }
 
+}
+
+Minecraft.createTree=function(r,c){
+  for (var i=r; i<r+2; i++){
+    for (var j=c; j<c+3; j++){
+      Minecraft.gameGrid[i][j].addClass("leaf");
+    }
+  }
+  Minecraft.gameGrid[r+2][c+1].addClass("tree");
+  Minecraft.gameGrid[r+3][c+1].addClass("tree");
 }
 
 Minecraft.blink=function(){

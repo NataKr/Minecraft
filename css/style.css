@@ -69,6 +69,12 @@ body{
       background-repeat: no-repeat;
     }
 
+    .wholeTree{
+      background-image: url('../images/wholeTree.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
   .toolBox{
     height: 600px;
