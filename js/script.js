@@ -120,6 +120,7 @@ Minecraft.clearField=function(){
   var invArray=$(".inventory");
   invArray.text(0);
   $(".inventory.person").text(5);
+  $(".inventory.wholeTree").text(2);
 }
 
 Minecraft.hightlight=function(event){
