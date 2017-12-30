@@ -31,11 +31,11 @@ Minecraft.generateGameField=function(){
   $(".start-screen").hide(); //changed jon
   $(".wrapper-wrapper").show();
   Minecraft.soundTheme();
+  var d = new Date();
+  var time = d.getHours();
 
   //creating the world field
   for (var i=0; i<r; i++){
-    var d = new Date();
-    var time = d.getHours();
 
     Minecraft.gameGrid[i]=new Array(c);
     for (var j=0; j<c; j++){
