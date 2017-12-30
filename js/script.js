@@ -13,6 +13,19 @@ $(document).ready(function(){
 
   $("#startGame").on("click", Minecraft.generateGameField);
   Minecraft.bindFunctionsToToolsAndInventory();
+
+  //bind function to size selection Field
+  $("#btn-resize").click(function(){
+    var userWidth=parseInt($("#size").val());
+    if (userWidth>=400&&userWidth<=1200){
+      var world=$(".worldBox div");
+      for (var i=world.length-1; i>=0; i--){
+        world[i].remove();
+      }
+      Minecraft.generateGameFieldWithParameter(Minecraft.gameGrid,userWidth);
+    }
+  });
+
 });
 
 Minecraft.bindFunctionsToToolsAndInventory=function(){
@@ -205,6 +218,51 @@ Minecraft.generateRandomWorld=function(){
     Minecraft.createTree((19-rnd-4),rndTree);
   } else{
     Minecraft.createSecondTree((19-rnd-6), rndTree);
+  }
+}
+
+Minecraft.generateGameFieldWithParameter=function(gameGrid, userWidth){
+//  $(".start").hide();
+  //$(".wrapper-wrapper").show();
+  //
+  var worldWidth=userWidth;
+  var worldHeight=userWidth*0.8;
+  var toolBoxWidth=Math.floor(userWidth*0.16);
+  var toolBoxHeight=userWidth*0.8;
+
+  $(".content-wrapper").css("width", (worldWidth+toolBoxWidth)+"px");
+  $(".worldBox").css("width", worldWidth+"px");
+  $(".worldBox").css("height", worldHeight+"px");
+  $(".toolBox").css("width", toolBoxWidth+"px");
+  $(".toolBox").css("height", toolBoxHeight+"px");
+  $(".inventory").css("height", Math.ceil(toolBoxWidth*0.41)+"px");
+  $(".inventory").css("width", Math.ceil(toolBoxWidth*0.41)+"px");
+  $(".tools").css("height", Math.ceil(toolBoxWidth*0.58)+"px");
+  $(".tools").css("width", Math.ceil(toolBoxWidth*0.58)+"px");
+
+  if (userWidth<700){
+    $("h4").css("font-size", "12px");
+    $(".inventory").css("font-size", "10px");
+    $(".tools").css("font-size", "10px");
+    $(".reset").css("font-size","10px");
+    $("body").css("font-family", "Arial, Helvetica, sans-serif");
+    $("h4").hide();
+  }
+  else if(userWidth>=700){
+    $("h4").show();
+    $("h4").css("font-size", "12px");
+    $(".inventory").css("font-size", "8px");
+    $(".tools").css("font-size", "8px");
+    $(".reset").css("font-size","12px");
+    $("body").css("font-family", "'Press Start 2P', cursive");
+  }
+
+  //creating the world field
+  for (var i=0; i<r; i++){
+    for (var j=0; j<c; j++){
+      $(".worldBox").append(gameGrid[i][j]);
+      //console.log(gameGrid[i][j]);
+    }
   }
 }
 

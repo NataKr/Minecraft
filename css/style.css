@@ -3,6 +3,10 @@ body{
 }
 .wrapper-wrapper{
   display: none;
+  text-align: center; /*added*/
+}
+.enter-size{  /*added*/
+  margin: 0 auto;
 }
 .content-wrapper{
   display: flex;
